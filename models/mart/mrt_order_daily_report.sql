@@ -1,4 +1,4 @@
-SELECT DATE_TRUNC(order_created_at, DAY) AS report_date,
+SELECT DATE_TRUNC(order_created_at, DAY) AS reporting_date,
     2 as column2,
     1 as Column1,
     mapping.account_manager,
@@ -9,6 +9,6 @@ SELECT DATE_TRUNC(order_created_at, DAY) AS report_date,
     AVG(total_order_amount) AS average_total_order_amount
 FROM {{ ref('int_sales_database__order') }} AS orders
 LEFT JOIN {{ ref('stg_google_sheets__account_manager_region_mapping') }} as mapping ON orders.user_state = mapping.state
-GROUP BY report_date,
+GROUP BY reporting_date,
     account_manager,
     state
